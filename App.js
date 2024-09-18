@@ -14,13 +14,12 @@ export default function App() {
   const [mantainances, setMantainances] = useState({})
   const [kilometers, setKilometers] = useState(0)
 
+  //This is to initialize the app data for the user. 
   useEffect(()=>{
     const getValues = async () => {
       await SecureStorage.setItemAsync('mantanances', '')
       const mantainances =  await SecureStorage.getItemAsync('mantainances')
-      //const kilometers = await SecureStorage.getItemAsync('kilometers')
       setMantainances(JSON.parse(mantainances))
-      //setKilometers(kilometers)
 
     }
     getValues()
@@ -32,6 +31,11 @@ export default function App() {
     setMantainances(newMantainances)
   } 
 
+  const setKilometersHandler = async (newItem) =>{
+    await SecureStorage.setItemAsync('kilometers', JSON.stringify(newItem))
+    setKilometers(newItem)
+  } 
+
 
   return (
     <NavigationContainer>
@@ -40,10 +44,12 @@ export default function App() {
           {(props)=> <Home navigation={props.navigation} mantainances={mantainances} />}
         </Stack.Screen>
 
-        <Stack.Screen name='kilometers' component={Kilometers} options={{headerShown: false}} />
+        <Stack.Screen name='kilometers'  options={{headerShown: false}}>
+          {(props)=> <Kilometers navigation={props.navigation} kilometers={kilometers} setKilometersHandler={setKilometersHandler} />}
+        </Stack.Screen>
 
         <Stack.Screen name='addMantainance'  options={{headerShown: false}} >
-          {(props)=> <AddMantainance navigation={props.navigation} setMantainancesHandler={setMantainancesHandler} />}
+          {(props)=> <AddMantainance navigation={props.navigation} kilometers={kilometers} setMantainancesHandler={setMantainancesHandler} />}
         </Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>

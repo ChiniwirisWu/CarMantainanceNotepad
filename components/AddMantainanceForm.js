@@ -5,20 +5,20 @@ import { Formik } from "formik";
 import RNPickerSelect from 'react-native-picker-select'
 
 
-export default function AddMantainanceForm({setMantainancesHandler}){
-  const kilometers = 10000
+export default function AddMantainanceForm({setMantainancesHandler, kilometers}){
   return (
-    <View>
+    <View style={{height: '74%'}}>
       <Formik 
         initialValues={{title: '', interval: '', changeNow: 'false'}} 
-        onSubmit={(values)=>{
-          newItem = {nextChange: parseInt(values.interval) + 1000, ...values}
+        onSubmit={(values, actions)=>{
+          newItem = {nextChange: parseInt(values.interval) + parseInt(kilometers.kilometers), ...values}
           setMantainancesHandler(newItem)
+          actions.resetForm()
         }}>
         {(props)=>(
           <View style={globalStyles.padding}>
             <Text>Name</Text>
-            <TextInput placeholder="e.g Lights broken " onChangeText={props.handleChange('title')} value={props.values.name} />
+            <TextInput placeholder="e.g Lights broken " onChangeText={props.handleChange('title')} value={props.values.title} />
             <Text>Interval of kilometers for each mantainance (e.g 1000)</Text>
             <TextInput placeholder="e.g 1000" onChangeText={props.handleChange('interval')} keyboardType="numeric" value={props.values.interval} />
             <Text>Have to fix now? (yes/no)</Text>

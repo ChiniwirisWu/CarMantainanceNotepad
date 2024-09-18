@@ -56,8 +56,12 @@ export const globalStyles = StyleSheet.create({
     bottom: 0,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
-    padding: 10,
+    justifyContent: 'space-evenly',
     height: 100,
   },
+  footerPressable: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
 })
