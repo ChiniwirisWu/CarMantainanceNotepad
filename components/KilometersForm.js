@@ -4,6 +4,7 @@ import { globalStyles } from "../assets/globalStyles";
 import { Formik } from "formik";
 
 function formatKilometers(kilometers){
+  kilometers = kilometers || 0
   let kilometers_str = kilometers.toString() 
   let counter = 0
   let result = ''

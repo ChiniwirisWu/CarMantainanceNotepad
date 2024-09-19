@@ -4,6 +4,14 @@ import { globalStyles } from "../assets/globalStyles";
 import { Formik } from "formik";
 import RNPickerSelect from 'react-native-picker-select'
 
+function createRandomKey(length){
+  const charts = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+  let result = ''
+  for(let i = 0; i < length; i++){
+    result += charts.charAt(Math.random() * charts.length)
+  }
+  return result 
+}
 
 export default function AddMantainanceForm({setMantainancesHandler, kilometers}){
   return (
@@ -11,7 +19,8 @@ export default function AddMantainanceForm({setMantainancesHandler, kilometers})
       <Formik 
         initialValues={{title: '', interval: '', changeNow: 'false'}} 
         onSubmit={(values, actions)=>{
-          newItem = {nextChange: parseInt(values.interval) + parseInt(kilometers.kilometers), ...values}
+          const key = createRandomKey(20) 
+          newItem = {nextChange: parseInt(values.interval) + parseInt(kilometers.kilometers), key: key, ...values}
           setMantainancesHandler(newItem)
           actions.resetForm()
         }}>

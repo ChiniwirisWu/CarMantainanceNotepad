@@ -6,7 +6,6 @@ import AddMantainanceForm from "../components/AddMantainanceForm";
 
 export default function AddMantainance({navigation, setMantainancesHandler, kilometers}){
 
-
   return (
     <View style={[globalStyles.screenContainer]}>
       <Header message="ADD CAR'S MANTAINANCE" />
