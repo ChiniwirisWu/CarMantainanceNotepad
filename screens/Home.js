@@ -7,7 +7,7 @@ import MantainanceList from "../components/MantainanceList";
 import Footer from "../components/Footer";
 
 
-export default function Home({navigation, mantainances, kilometers, updateMantainancesHandler}){
+export default function Home({navigation, mantainances, kilometers,removeMantainanceHandler , updateMantainancesHandler, refreshNextChangeHandler}){
   const [searchedMantainace, setSearchedMantainance] = useState('')
 
   return (
@@ -19,7 +19,7 @@ export default function Home({navigation, mantainances, kilometers, updateMantai
           <Text>No mantanances added...</Text>
         </View>
       ): (
-        <MantainanceList updateMantainancesHandler={updateMantainancesHandler} mantainances={mantainances} kilometers={kilometers} navigation={navigation} />
+        <MantainanceList refreshNextChangeHandler={refreshNextChangeHandler} removeMantainanceHandler={removeMantainanceHandler} updateMantainancesHandler={updateMantainancesHandler} mantainances={mantainances} kilometers={kilometers} navigation={navigation} />
       )}
       <Footer navigation={navigation} />
     </View>

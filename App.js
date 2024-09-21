@@ -40,6 +40,31 @@ export default function App() {
     setKilometers(newItem)
   } 
 
+  const refreshNextChangeHandler = async (key) =>{
+    console.log('here', key)
+    for(let i = 0; i < mantainances.length; i++){
+      if(mantainances[i].key == key){
+        mantainances[i].nextChange = parseInt(mantainances[i].interval) + parseInt(kilometers.kilometers) 
+        await SecureStorage.setItemAsync('mantainances', JSON.stringify(mantainances)) 
+        setMantainances(mantainances)
+        break
+      }
+    }
+  }
+
+  const removeMantainanceHandler = async (key)=>{
+    console.log('hi there')
+    for(let i = 0; i < mantainances.length; i++){
+      if(mantainances[i].key == key){
+        console.log('found it')
+        mantainances.splice(i,1)
+        await SecureStorage.setItemAsync('mantainances', JSON.stringify(mantainances)) 
+        setMantainances(mantainances)
+        break
+      }
+    }
+  }
+
   //TODO: Insert replace the item of an array with an object(newItem).
   //create a new item with the previous nextChange property
   //create a new collection of items for mantainances with the new data.
@@ -48,13 +73,10 @@ export default function App() {
   const updateMantainancesHandler = async (newItem) => {
     for(let i = 0; i < mantainances.length; i++){
       if(mantainances[i].key == newItem.key){
-        console.log(mantainances)
-        console.log('founded')
-        newItem.nextChange = mantainances[i].nextChange
         mantainances[i] = newItem
-        console.log(mantainances)
         await SecureStorage.setItemAsync('mantainances', JSON.stringify(mantainances))
         setMantainances(mantainances)
+        break
       }
     }
   }
@@ -63,7 +85,7 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator initialRouteName='home'>
         <Stack.Screen name='home'  options={{ headerShown: false }}>
-          {(props)=> <Home updateMantainancesHandler={updateMantainancesHandler} navigation={props.navigation} mantainances={mantainances} kilometers={kilometers} />}
+          {(props)=> <Home removeMantainanceHandler={removeMantainanceHandler} refreshNextChangeHandler={refreshNextChangeHandler} updateMantainancesHandler={updateMantainancesHandler} navigation={props.navigation} mantainances={mantainances} kilometers={kilometers} />}
         </Stack.Screen>
         <Stack.Screen name='kilometers'  options={{headerShown: false}}>
           {(props)=> <Kilometers navigation={props.navigation} kilometers={kilometers} setKilometersHandler={setKilometersHandler} />}

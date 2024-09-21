@@ -6,12 +6,12 @@ import DetailsForm from "../components/DetailsForm";
 
 export default function Details({route}){
 
-  const {updateMantainancesHandler, kilometers, item} = route.params 
+  const {updateMantainancesHandler, kilometers, item, refreshNextChangeHandler, removeMantainanceHandler, navigation} = route.params 
   
   return (
     <View style={[globalStyles.screenContainer]}>
-      <Header message="EDIT CAR'S DETAILS" />
-      <DetailsForm style={{height: '68%'}} kilometers={kilometers} item={item} updateMantainancesHandler={updateMantainancesHandler} />
+      <Header message="CAR'S DETAILS" />
+      <DetailsForm style={{height: '68%'}} refreshNextChangeHandler={refreshNextChangeHandler} removeMantainanceHandler={removeMantainanceHandler} kilometers={kilometers} item={item} updateMantainancesHandler={updateMantainancesHandler} navigation={navigation} />
     </View>
   )
 

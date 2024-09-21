@@ -17,6 +17,10 @@ export const globalStyles = StyleSheet.create({
     fontSize: 30,
     fontWeight: '900'
   },
+  h4: {
+    fontSize: 15,
+    fontWeight: '700'
+  },
   headerContainer: {
     height: '15%',
     paddingVertical: 10
