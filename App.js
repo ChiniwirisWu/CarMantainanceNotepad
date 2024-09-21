@@ -18,8 +18,6 @@ export default function App() {
   //This is to initialize the app data for the user. 
   useEffect(()=>{
     const getValues = async () => {
-      //await SecureStorage.setItemAsync('mantainances', JSON.stringify([]))
-      //await SecureStorage.setItemAsync('kilometers', JSON.stringify({kilometers: 0}))
       const mantainances =  await SecureStorage.getItemAsync('mantainances')
       const kilometers =  await SecureStorage.getItemAsync('kilometers')
       setMantainances(JSON.parse(mantainances))
@@ -29,6 +27,7 @@ export default function App() {
     getValues()
   }, [mantainances])
 
+  //Create new mantainances items that goes throughout the app.
   const setMantainancesHandler = async (newItem) => {
     const newMantainances = [newItem, ...mantainances || []]
     await SecureStorage.setItemAsync('mantainances', JSON.stringify(newMantainances))
@@ -65,11 +64,6 @@ export default function App() {
     }
   }
 
-  //TODO: Insert replace the item of an array with an object(newItem).
-  //create a new item with the previous nextChange property
-  //create a new collection of items for mantainances with the new data.
-  //save it in SecureStorage.
-  //seve it updating the state
   const updateMantainancesHandler = async (newItem) => {
     for(let i = 0; i < mantainances.length; i++){
       if(mantainances[i].key == newItem.key){
