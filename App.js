@@ -27,7 +27,7 @@ export default function App() {
 
     }
     getValues()
-  }, [])
+  }, [mantainances])
 
   const setMantainancesHandler = async (newItem) => {
     const newMantainances = [newItem, ...mantainances || []]
@@ -41,15 +41,20 @@ export default function App() {
   } 
 
   //TODO: Insert replace the item of an array with an object(newItem).
+  //create a new item with the previous nextChange property
+  //create a new collection of items for mantainances with the new data.
+  //save it in SecureStorage.
+  //seve it updating the state
   const updateMantainancesHandler = async (newItem) => {
-    mantainance_copy = mantainances.slice()
-    for(let i = 0; i < mantainances_copy.length; i++){
-      if(mantainances_copy[i].key == newItem.key){
-        newItem.nextChange = mantainances_copy[i].nextChange
-        mantainances_copy[i] = newItem
-        await SecureStorage.setItemAsync('mantainances', mantainance_copy)
-        setMantainances(mantainances_copy)
-        break
+    for(let i = 0; i < mantainances.length; i++){
+      if(mantainances[i].key == newItem.key){
+        console.log(mantainances)
+        console.log('founded')
+        newItem.nextChange = mantainances[i].nextChange
+        mantainances[i] = newItem
+        console.log(mantainances)
+        await SecureStorage.setItemAsync('mantainances', JSON.stringify(mantainances))
+        setMantainances(mantainances)
       }
     }
   }
