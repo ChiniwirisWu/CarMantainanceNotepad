@@ -9,7 +9,7 @@ export const globalStyles = StyleSheet.create({
     flex: 1
   }, 
   h1: {
-    fontSize: 30,
+    fontSize: 25,
     color: '#fff',
     fontWeight: '900',
     marginTop: 15

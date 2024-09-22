@@ -54,8 +54,6 @@ export default function DetailsForm({updateMantainancesHandler, kilometers, item
             <TextInput placeholder={item.interval} onChangeText={props.handleChange('interval')} keyboardType="numeric" value={props.values.interval} />
             <Text style={globalStyles.h4}>Next change (e.g 1000)</Text>
             <TextInput placeholder={item.nextChange.toString()} onChangeText={props.handleChange('nextChange')} keyboardType="numeric" value={props.values.nextChange} />
-            <Text style={globalStyles.h4}>Have to fix now? (yes/no)</Text>
-            <RNPickerSelect items={[{label: 'yes', value: 'true'}, {label:'no', value: 'false'}]} onValueChange={props.handleChange('changeNow')} value={props.values.changeNow} />
             <Button title="submit" onPress={props.handleSubmit}   />
           </View>
         )}

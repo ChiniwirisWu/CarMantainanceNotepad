@@ -1,4 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
+import { LogBox } from 'react-native';
 import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -10,6 +11,9 @@ import AddMantainance from './screens/AddMantainance';
 import Details from './screens/Details';
 
 const Stack = createNativeStackNavigator()
+LogBox.ignoreLogs([
+  'Non-serializable values were found in the navigation state',
+])
 
 export default function App() {
   const [mantainances, setMantainances] = useState([])
@@ -53,38 +57,39 @@ export default function App() {
     setKilometers(newItem)
   } 
 
+  //Looks like using "mantainances" variable throws errors, so I should use a copy of that array.
   const refreshNextChangeHandler = async (key) =>{
-    console.log('here', key)
-    for(let i = 0; i < mantainances.length; i++){
-      if(mantainances[i].key == key){
-        mantainances[i].nextChange = parseInt(mantainances[i].interval) + parseInt(kilometers.kilometers) 
-        await SecureStorage.setItemAsync('mantainances', JSON.stringify(mantainances)) 
-        setMantainances(mantainances)
-        break
+    let mantainances_copy = Array.from(mantainances)
+    for(let i = 0; i < mantainances_copy.length; i++){
+      if(mantainances_copy[i].key == key){
+        mantainances_copy[i].nextChange = parseInt(mantainances_copy[i].interval) + parseInt(kilometers.kilometers) 
+        await SecureStorage.setItemAsync('mantainances', JSON.stringify(mantainances_copy)) 
+        setMantainances(mantainances_copy)
+        setShowMantainances(mantainances_copy)
       }
     }
   }
 
   const removeMantainanceHandler = async (key)=>{
-    for(let i = 0; i < mantainances.length; i++){
-      if(mantainances[i].key == key){
-        mantainances.splice(i,1)
-        await SecureStorage.setItemAsync('mantainances', JSON.stringify(mantainances)) 
-        setShowMantainances(mantainances)
-        setMantainances(mantainances)
-        break
+    let mantainances_copy = Array.from(mantainances)
+    for(let i = 0; i < mantainances_copy.length; i++){
+      if(mantainances_copy[i].key == key){
+        mantainances_copy.splice(i,1)
+        await SecureStorage.setItemAsync('mantainances', JSON.stringify(mantainances_copy)) 
+        setShowMantainances(mantainances_copy)
+        setMantainances(mantainances_copy)
       }
     }
   }
 
   const updateMantainancesHandler = async (newItem) => {
-    for(let i = 0; i < mantainances.length; i++){
-      if(mantainances[i].key == newItem.key){
-        mantainances[i] = newItem
-        await SecureStorage.setItemAsync('mantainances', JSON.stringify(mantainances))
-        setMantainances(mantainances)
-        setShowMantainances(mantainances)
-        break
+    let mantainances_copy = Array.from(mantainances)
+    for(let i = 0; i < mantainances_copy.length; i++){
+      if(mantainances_copy[i].key == newItem.key){
+        mantainances_copy[i] = newItem
+        await SecureStorage.setItemAsync('mantainances', JSON.stringify(mantainances_copy))
+        setMantainances(mantainances_copy)
+        setShowMantainances(mantainances_copy)
       }
     }
   }

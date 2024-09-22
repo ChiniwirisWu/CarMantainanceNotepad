@@ -11,7 +11,7 @@ export default function MantainanceList({mantainances, navigation, updateMantain
             <MaterialIcons name="car-repair" color="#213a80" size={80} />
             <View>
               <Text style={globalStyles.h2}>{item.title}</Text>
-              <Text>Next change at {item.nextChange} km</Text>
+              <Text>Next change at <Text style={{color: (item.nextChange - kilometers.kilometers > 0)? 'green' : 'red'}}>{item.nextChange}</Text> km</Text>
             </View>
             <TouchableHighlight 
               style={globalStyles.toDetailsPressable} 
