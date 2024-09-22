@@ -20,7 +20,7 @@ export default function AddMantainanceForm({setMantainancesHandler, kilometers})
         initialValues={{title: '', interval: '', changeNow: 'false'}} 
         onSubmit={(values, actions)=>{
           const key = createRandomKey(20) 
-          newItem = {nextChange: parseInt(values.interval) + parseInt(kilometers.kilometers), key: key, ...values}
+          newItem = {nextChange: (values.changeNow == 'true')? (0): (parseInt(values.interval) + parseInt(kilometers.kilometers)), key: key, ...values}
           setMantainancesHandler(newItem)
           actions.resetForm()
         }}>

@@ -9,9 +9,10 @@ export const globalStyles = StyleSheet.create({
     flex: 1
   }, 
   h1: {
-    fontSize: 40,
+    fontSize: 30,
     color: '#fff',
-    fontWeight: '900'
+    fontWeight: '900',
+    marginTop: 15
   },
   h2: {
     fontSize: 30,
@@ -33,7 +34,7 @@ export const globalStyles = StyleSheet.create({
     height: '7%'
   },
   textInput: {
-    color: '#fff',
+    backgroundColor: '#eee',
     borderWidth: 1,
     borderRadius: 15,
     width: 250,

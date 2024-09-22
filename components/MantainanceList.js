@@ -7,7 +7,7 @@ export default function MantainanceList({mantainances, navigation, updateMantain
       <FlatList
         data={mantainances}
         renderItem={({item, index})=>(
-          <View style={globalStyles.listItem}>
+          <View key={item.key} style={globalStyles.listItem}>
             <MaterialIcons name="car-repair" color="#213a80" size={80} />
             <View>
               <Text style={globalStyles.h2}>{item.title}</Text>
@@ -18,7 +18,8 @@ export default function MantainanceList({mantainances, navigation, updateMantain
               underlayColor='#eee' activeOpacity={0.6} 
               onPress={()=> navigation.navigate('details', {
                 updateMantainancesHandler: updateMantainancesHandler,
-                kilometers: kilometers, item: item, 
+                kilometers: kilometers, 
+                item: item, 
                 refreshNextChangeHandler: refreshNextChangeHandler, 
                 removeMantainanceHandler: removeMantainanceHandler,
                 navigation: navigation})} >

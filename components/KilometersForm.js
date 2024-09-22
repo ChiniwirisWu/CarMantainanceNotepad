@@ -34,7 +34,7 @@ export default function KilometersForm({kilometers, setKilometersHandler}){
         {(props)=>(
           <View>
             <Text>New kilometers </Text>
-            <TextInput placeholder="e.g 10000" onChangeText={props.handleChange('kilometers')} value={props.values.kilometers} />
+            <TextInput keyboardType="numeric" placeholder="e.g 10000" onChangeText={props.handleChange('kilometers')} value={props.values.kilometers} />
             <Button title="submit" onPress={props.handleSubmit} />
           </View>
         )}
